@@ -18,16 +18,16 @@ import jakarta.validation.constraints.Size;
 @Table(name="tb_postagens")
 public class Postagem {
 
-	@Id // indica que este atributo será uma chave primaria na minha tabela
+	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "Este atributo é de preenchimento obrigatório")
-	@Size(min = 5, max=100,message="este atributo tem que ter no minimo 5 caracteres")
+	@NotBlank(message = "O atributo titulo é Obrigatório!")
+	@Size(min = 5, max=100,message="este atributo tem que ter no minimo 5 e no máximo 100 caracteres")
 	private String titulo;
 	
-	@NotBlank(message = "Este atributo é de preenchimento obrigatório")
-	@Size(min = 10, max=100,message="este atributo tem que ter no minimo 10 caracteres")
+	@NotBlank(message = "O atributo Texto é obrigatório!")
+	@Size(min = 10, max=1000,message="este atributo tem que ter no minimo 10 e no maximo 1000 caracteres")
 	private String texto;
 	
 	@UpdateTimestamp
