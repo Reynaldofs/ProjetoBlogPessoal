@@ -16,15 +16,19 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_temas")
-public class Tema {
 
+public class Tema {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull(message = "este campo DESCRIÇÃO é de preenchimento obrigadorio")
+	@NotNull(message = "Este campo DESCRIÇÃO é de preenchimento obrigatório")
 	private String descricao;
-
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tema", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("tema")
+	private List<Postagem> postagem;
 	
 	
 	public List<Postagem> getPostagem() {
@@ -35,10 +39,6 @@ public class Tema {
 		this.postagem = postagem;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "tema",cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("tema")
-	private List<Postagem> postagem;
-	
 	public Long getId() {
 		return id;
 	}
@@ -54,6 +54,4 @@ public class Tema {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	
 }
